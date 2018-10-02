@@ -45,8 +45,12 @@
                 <iron-icon icon="lock"></iron-icon>
             </paper-button>
             
-            <paper-button on-click="_showSearch" hidden$="[[!signedIn]]" class="search-button">
+            <paper-button id="searchbutton" on-click="_showSearch" hidden$="[[!signedIn]]" class="search-button">
                 <span>Buscar Kairosero</span>
+            </paper-button>
+
+            <paper-button id="returnButton" on-click="_home" class="search-button hidden-class">
+                <span>Regresar</span>
             </paper-button>
             
             <paper-button on-click="_signOut" hidden$="[[!signedIn]]" class="close__session">
@@ -268,17 +272,32 @@
 
             _showSearch(event){
                 this.search = true;
-                console.log("busqueda activada:" + this.search);
-                event.target.classList.add("hidden");
+                event.target.classList.add("hidden-class");
                 let cont  = Polymer.dom(this.root).querySelector(".contls");
                 let line  = Polymer.dom(this.root).querySelectorAll(".line");
+                let returnButton = this.$.returnButton;
                 let searchcont  = Polymer.dom(this.root).querySelectorAll("search-component");
                 cont.classList.add("hidden-class");
                 line[0].classList.add("hidden-class");
                 line[1].classList.add("hidden-class");
                 searchcont[0].classList.remove("hidden-class");
-                console.log("user:");
-                console.log(this.data);
+                returnButton.classList.remove("hidden-class");
+            }
+
+            _home(event){
+                this.search = false;
+                event.target.classList.add("hidden-class");
+                let cont  = Polymer.dom(this.root).querySelector(".contls");
+                let line  = Polymer.dom(this.root).querySelectorAll(".line");
+                let returnButton = this.$.searchbutton;
+                let searchcont  = Polymer.dom(this.root).querySelectorAll("search-component");
+                cont.classList.remove("hidden-class");
+                line[0].classList.remove("hidden-class");
+                line[1].classList.remove("hidden-class");
+                searchcont[0].classList.add("hidden-class");
+                
+                returnButton.classList.remove("hidden-class");
+
             }
 
             _saveInfo(key, data){
