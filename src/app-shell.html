@@ -38,24 +38,9 @@
         
         
         <div class="contls containerEsp" id="containerEsp" name ="containerEsp">
-            <!-- TODO: componente header o toolbar -->
-            <ks-header signed-in="[[signedIn]]" on-show-search="_showSearch" on-sign-out="_signOut"></ks-header>
-            
-            <!-- TODO: cambiar por componente de myphoto <my-photo></my-photo>  -->
-            <div style="margin-top: 110px">
-                <div class="cont-comp-photo">
-                    <div class="photo">
-                            <img class="person-img" src="[[profilePic]]" alt="person">
-                    </div>
-                    <div class="data-photo">
-                        <p><strong>Annuar</strong></p>
-                        <p><strong>Harb </strong></p> <br>
-                        <p><strong>Polymer Expert</strong></p>
-                        <p>annuarh@kairosds.com</p>
-                        <p>+52 5542 159 282</p>
-                    </div>
-                </div>
-            </div>
+
+            <ks-header signed-in="[[signedIn]]" on-show-search="_showSearch" on-sign-out="_signOut"></ks-header>            
+            <my-photo user="{{data}}" profilePic="{{profilePic}}"></my-photo>
 
             <p>Introduce tus Datos</p>
             <div class="line"></div>
@@ -247,17 +232,19 @@
             }
 
             _showSearch(event){
+                console.log(this.profilePic);
                 this.search = true;
                 event.target.classList.add("hidden-class");
                 let cont  = Polymer.dom(this.root).querySelector(".contls");
                 let line  = Polymer.dom(this.root).querySelectorAll(".line");
-                let returnButton = this.$.returnButton;
+                //let returnButton = this.$.returnButton;
                 let searchcont  = Polymer.dom(this.root).querySelectorAll("search-component");
                 cont.classList.add("hidden-class");
                 line[0].classList.add("hidden-class");
                 line[1].classList.add("hidden-class");
                 searchcont[0].classList.remove("hidden-class");
-                returnButton.classList.remove("hidden-class");
+                //returnButton.classList.remove("hidden-class");
+                
             }
 
             _home(event){
